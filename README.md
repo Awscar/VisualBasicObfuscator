@@ -60,6 +60,7 @@ optional arguments:
                         case some name has to be in original script cause it
                         may break it otherwise). Repeat the option for more
                         words.
+                        It also affects strings, and also case sensitive.
   -v, --verbose         Verbose output.
   -q, --quiet           No unnecessary output.
 ```

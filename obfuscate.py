@@ -41,9 +41,9 @@ class bcolors:
 def out(x, col = ''):
 	if not config['quiet']:
 		if col:
-			sys.stderr.write(col + x + bcolors.ENDC + '\n')
+			sys.stdout.write(col + x + bcolors.ENDC + '\n')
 		else:
-			sys.stderr.write(x + '\n')
+			sys.stdout.write(x + '\n')
 
 def log(x, col = ''):
 	if config['verbose']:
@@ -796,6 +796,10 @@ class ScriptObfuscator:
 		for m in re.finditer(ScriptObfuscator.STRINGS_REGEX, self.output, flags=re.I|re.M):
 			orig_string = m.group(1)
 			string = orig_string[1:-1]
+
+			if string in self.reserved_words: 
+				info('String omitted: ' + string)
+				continue
 
 			opening = max(m.span()[0]-500, 0)
 			line_start = opening + self.output[opening:m.span()[0]].rfind('\n') + 1
